@@ -9,6 +9,10 @@ import (
 )
 
 func main() {
+	flag.Usage = func() {
+		fmt.Println("simple HTTP server that logs anything you throw at it ")
+		flag.PrintDefaults()
+	}
 	addr := flag.String("a", ":8347", "address to listen on")
 	flag.Parse()
 
