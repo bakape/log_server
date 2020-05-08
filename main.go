@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -8,8 +9,11 @@ import (
 )
 
 func main() {
+	addr := flag.String("a", ":8347", "address to listen on")
+	flag.Parse()
+
 	err := http.ListenAndServe(
-		":8347",
+		*addr,
 		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			buf, err := ioutil.ReadAll(r.Body)
 			if err != nil {
